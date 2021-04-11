@@ -44,7 +44,7 @@ public class App {
                             request = "";
                         }
                     }
-                    System.out.println(sendMessageWithResponse(request));
+                    System.out.print(sendMessageWithResponse(request));
                     if (request.trim().equals("STOP")) {
                         exit();
                     }
@@ -185,25 +185,12 @@ public class App {
 
         SocketChannel client = (SocketChannel) key.channel();
         int byteCounter;
-<<<<<<< HEAD
         byteCounter = client.read(buffer);
-=======
-        try {
-            byteCounter = client.read(buffer);
-        } catch (IOException e) {
-            client.close();
-            return;
-        }
->>>>>>> e35bfd86998c6d6220b09a4597978e2d6b3bcd25
         if (byteCounter == -1) {
             client.close();
             System.out.println("Клиент отсоединился");
             return;
         }
-<<<<<<< HEAD
-        buffer.flip();
-=======
->>>>>>> e35bfd86998c6d6220b09a4597978e2d6b3bcd25
         String fromClient = new String(Arrays.copyOfRange(buffer.array(), 0, byteCounter)).trim();
         System.out.println("От клиента пришло " + fromClient);
         if (fromClient.equals("STOP")) {
@@ -214,7 +201,7 @@ public class App {
             String answer;
             try {
                 intFromClient = Integer.parseInt(fromClient);
-                answer = String.valueOf(fib(intFromClient));
+                answer = fib(intFromClient) + "\n";
             } catch (NumberFormatException e) {
                 answer = "Сервер принимает только целые числа больше 0";
             }
@@ -235,7 +222,7 @@ public class App {
             while (clientChannel.read(bufferResponse) == 0) {
             }
             clientChannel.read(bufferResponse);
-            response = new String(bufferResponse.array()).trim();
+            response = new String(bufferResponse.array());
             bufferResponse.clear();
         } catch (IOException e) {
             System.out.println("Сервер здох");
