@@ -32,9 +32,9 @@ public class App {
                         System.out.println("Введите число которое будет отправлено на сервер, или STOP для завершения работы");
                         request = scan.nextLine().trim();
                         try {
-                            if(!request.equals("STOP")) {
+                            if (!request.equals("STOP")) {
                                 int intRequest = Integer.parseInt(request);
-                                if(intRequest < 0 ){
+                                if (intRequest < 0) {
                                     System.out.println("Введенное значение не может быть меньше нуля");
                                     request = "";
                                 }
@@ -185,25 +185,12 @@ public class App {
 
         SocketChannel client = (SocketChannel) key.channel();
         int byteCounter;
-<<<<<<< HEAD
         byteCounter = client.read(buffer);
-=======
-        try {
-            byteCounter = client.read(buffer);
-        } catch (IOException e) {
-            client.close();
-            return;
-        }
->>>>>>> e35bfd86998c6d6220b09a4597978e2d6b3bcd25
         if (byteCounter == -1) {
             client.close();
             System.out.println("Клиент отсоединился");
             return;
         }
-<<<<<<< HEAD
-        buffer.flip();
-=======
->>>>>>> e35bfd86998c6d6220b09a4597978e2d6b3bcd25
         String fromClient = new String(Arrays.copyOfRange(buffer.array(), 0, byteCounter)).trim();
         System.out.println("От клиента пришло " + fromClient);
         if (fromClient.equals("STOP")) {
@@ -245,11 +232,14 @@ public class App {
     }
 
     static int fib(int n) {
-        if (n < 0) {
-            throw new NumberFormatException();
+        int fibonacci = 0;
+        int num = 0;
+        int num2 = 1;
+        for (int loop = 0; loop < n; loop++) {
+            fibonacci = num + num2;
+            num = num2;
+            num2 = fibonacci;
         }
-        if (n <= 1)
-            return n;
-        return fib(n - 1) + fib(n - 2);
+        return fibonacci;
     }
 }
